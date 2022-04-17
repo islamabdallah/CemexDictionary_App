@@ -17,8 +17,8 @@ class AddQuestionCubit extends Cubit<AddQuestionState> {
   pickImages() async {
     final ImagePicker _picker = ImagePicker();
     List<XFile>? images = await _picker.pickMultiImage(
-      maxHeight: 200,
-      maxWidth: 200,
+      // maxHeight: 200,
+      // maxWidth: 200,
     );
     if (images != null) {
       for (var image in images) {

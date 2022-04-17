@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "776620723513",
+    "project_id": "cemexdictionaryapp-2e4fb",
+    "storage_bucket": "cemexdictionaryapp-2e4fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:776620723513:android:0074f01ff8c7e999762ce8",
+        "android_client_info": {
+          "package_name": "com.cemex.faq_cemex"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "776620723513-kl9gvogrr0q574jp42jo84d14r5lfsah.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cemex.faq_cemex",
+            "certificate_hash": "dd37c8af4d5f14d6fbacb184f6e2ce5a60d8b48d"
+          }
+        },
+        {
+          "client_id": "776620723513-vf9ch226o6bt01ngo1rr2bs0enbdc991.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9sZeGADmUPVJ21Gu3cf2mzrBwGsDCtdo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "776620723513-vf9ch226o6bt01ngo1rr2bs0enbdc991.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

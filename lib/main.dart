@@ -1,21 +1,28 @@
-import 'package:faq_cemex/ui/modules/search_screen/search_cubit.dart';
+import 'package:faq_cemex/ui/modules/add_question/screens/add_question_screen.dart';
+import 'package:faq_cemex/ui/modules/login/screens/login_screen.dart';
+import 'package:faq_cemex/ui/modules/notification/screens/notification_screen.dart';
+import 'package:faq_cemex/ui/modules/search_screen/cubit/search_cubit.dart';
+import 'package:faq_cemex/ui/shared/constants.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 
-import 'add_question/add_question_screen.dart';
 import 'carousel_youtube_player_screen.dart';
+import 'core/config/routes/routes.dart';
 import 'core/utils/services/bloc_observer.dart';
 import 'core/utils/services/local/cache_helper.dart';
 import 'home_screen.dart';
-import 'ui/modules/login/presentation/pages/login-page.dart';
-import 'ui/modules/my_questions/my_question_screen.dart';
+import 'ui/modules/my_questions/screens/my_questions_screen.dart';
 import 'ui/modules/question_details/question_details_screen.dart';
-import 'ui/modules/search_screen/search_screen.dart';
+import 'ui/modules/search_screen/screens/search_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
 
   await translator.init(
     language: 'en',
@@ -54,6 +61,8 @@ class MyApp extends StatelessWidget {
               )
             ],
             child: MaterialApp(
+              color: mainColor,
+
               localizationsDelegates: translator.delegates,
               // Android + iOS Delegates
               locale: translator.activeLocale,
@@ -63,8 +72,19 @@ class MyApp extends StatelessWidget {
               title: 'Flutter Demo',
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
-                primarySwatch: Colors.red,
+                primaryColor: mainColor,
+                colorScheme: ColorScheme.fromSwatch().copyWith(
+                  primary: mainColor,
+                ),
+                floatingActionButtonTheme:FloatingActionButtonThemeData(
+                  backgroundColor: mainColor
+                )
               ),
+              onGenerateRoute: AppRoutes.onGenerateRoutes,
+              // initialRoute: LoginScreen.routeName,
+              // initialRoute: AddQuestionScreen.routeName,
+              // initialRoute: SearchScreen.routeName,
+              initialRoute: NotificationScreen.routeName,
               builder: (context, widget) {
                 ScreenUtil.setContext(context);
                 return MediaQuery(
@@ -78,8 +98,8 @@ class MyApp extends StatelessWidget {
               // home: SearchScreen(),
               // home: QuestionDetails(),
               // home: CarouselYoutube(),
-              // home: TripWidget(),
-              home: MyQuestions(),
+              // home: AddQuestionScreen(),
+              // home: MyQuestions(),
               // home: LoginWidget(),
             ),
           );

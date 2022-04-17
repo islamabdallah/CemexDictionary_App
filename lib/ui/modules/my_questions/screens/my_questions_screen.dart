@@ -2,10 +2,11 @@ import 'package:faq_cemex/ui/shared/components/question_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
-import '../../shared/components/animated_list.dart';
-import '../../shared/models/question.dart';
+import '../../../shared/components/animated_list.dart';
+import '../../../shared/models/question.dart';
 
 class MyQuestions extends StatefulWidget {
+  static const routeName = 'MyQuestionsScreen';
   const MyQuestions({Key? key}) : super(key: key);
 
   @override

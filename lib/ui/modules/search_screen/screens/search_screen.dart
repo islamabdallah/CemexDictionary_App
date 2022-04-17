@@ -1,19 +1,31 @@
-import 'package:faq_cemex/ui/modules/search_screen/my_chip.dart';
-import 'package:faq_cemex/ui/modules/search_screen/search_cubit.dart';
+import 'package:faq_cemex/ui/modules/search_screen/components/my_chip.dart';
+import 'package:faq_cemex/ui/modules/search_screen/cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../shared/components/animated_list.dart';
-import '../../shared/components/question_widget.dart';
-import '../../shared/models/question.dart';
-import 'multiselect.dart';
+import '../../../../core/firebase/push_notification_service.dart';
+import '../../../shared/components/animated_list.dart';
+import '../../../shared/components/question_widget.dart';
+import '../../../shared/models/question.dart';
+import '../components/multiselect.dart';
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatefulWidget {
   static const routeName = 'SearchScreen';
 
   const SearchScreen({Key? key}) : super(key: key);
 
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
 
+class _SearchScreenState extends State<SearchScreen> {
+  @override
+  void initState() {
+
+    PushNotificationService.init(context);
+
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var cubit = SearchCubit.get(context);

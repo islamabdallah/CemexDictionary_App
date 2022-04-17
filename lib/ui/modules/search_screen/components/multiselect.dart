@@ -87,7 +87,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'search_cubit.dart';
+import '../cubit/search_cubit.dart';
 
 class MultiSelectDialog extends StatelessWidget {
   const MultiSelectDialog({Key? key}) : super(key: key);
