@@ -18,10 +18,13 @@ class StaggeredAnimatedList extends StatelessWidget {
         itemBuilder: (context, index) => AnimationConfiguration.staggeredList(
           position: index,
           duration: const Duration(milliseconds: 1000),
-          child: FadeInAnimation(
-            // horizontalOffset: 50,
-            // verticalOffset: 50.0,
-            child: QuestionWidget(question: questions[index]),
+          child: SlideAnimation(
+            horizontalOffset: 100.0,
+            child: FadeInAnimation(
+              // horizontalOffset: 50,
+              // verticalOffset: 50.0,
+              child: QuestionWidget(question: questions[index]),
+            ),
           ),
         ),
         itemCount: questions.length,

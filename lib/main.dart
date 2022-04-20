@@ -1,11 +1,15 @@
 import 'package:faq_cemex/ui/modules/add_question/screens/add_question_screen.dart';
 import 'package:faq_cemex/ui/modules/login/screens/login_screen.dart';
 import 'package:faq_cemex/ui/modules/notification/screens/notification_screen.dart';
+import 'package:faq_cemex/ui/modules/register/screens/register_screen.dart';
 import 'package:faq_cemex/ui/modules/search_screen/cubit/search_cubit.dart';
 import 'package:faq_cemex/ui/shared/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
@@ -19,10 +23,20 @@ import 'ui/modules/my_questions/screens/my_questions_screen.dart';
 import 'ui/modules/question_details/question_details_screen.dart';
 import 'ui/modules/search_screen/screens/search_screen.dart';
 
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print('Handling a background message ${message.messageId}');
+  FlutterAppBadger.updateBadgeCount(1);
+
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+  await CacheHelper.init();
 
   await translator.init(
     language: 'en',
@@ -50,6 +64,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Color(0xFFCA3A3A), //or set color with: Color(0xFF0000FF)
+    ));
+
     return ScreenUtilInit(
         designSize: const Size(375, 812),
         minTextAdapt: true,
@@ -72,6 +90,7 @@ class MyApp extends StatelessWidget {
               title: 'Flutter Demo',
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
+                scaffoldBackgroundColor: backgroundColor,
                 primaryColor: mainColor,
                 colorScheme: ColorScheme.fromSwatch().copyWith(
                   primary: mainColor,
@@ -81,10 +100,11 @@ class MyApp extends StatelessWidget {
                 )
               ),
               onGenerateRoute: AppRoutes.onGenerateRoutes,
-              // initialRoute: LoginScreen.routeName,
+              initialRoute: LoginScreen.routeName,
+              // initialRoute: RegisterScreen.routeName,
               // initialRoute: AddQuestionScreen.routeName,
               // initialRoute: SearchScreen.routeName,
-              initialRoute: NotificationScreen.routeName,
+              // initialRoute: NotificationScreen.routeName,
               builder: (context, widget) {
                 ScreenUtil.setContext(context);
                 return MediaQuery(

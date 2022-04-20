@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_viewer/image_viewer.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class QuestionDetails extends StatefulWidget {
   const QuestionDetails({Key? key}) : super(key: key);
@@ -19,9 +20,15 @@ class _QuestionDetailsState extends State<QuestionDetails> {
   @override
   Widget build(BuildContext context) {
     final List<String> urlImages = [
-      'https://cdn.eso.org/images/thumb300y/eso1907a.jpg',
-      'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
-      'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Energetically_Modified_Cement_%28EMC%29_Lule%C3%A5_Sweden_08_2020.jpg/1200px-Energetically_Modified_Cement_%28EMC%29_Lule%C3%A5_Sweden_08_2020.jpg',
+      'https://www.globmac.com/wp-content/uploads/2021/08/difference-between-concrete-and-cement-01.jpg',
+      'https://cdn.shopify.com/s/files/1/0789/0805/articles/cement_vs_concrete_800x.png?v=1510110035',
+    ];
+
+    final List<String> urlImagesAns = [
+      'https://www.civilclick.com/wp-content/uploads/2020/04/Difference-between-concrete-and-cement-comparison.png',
+      'https://www.familyhandyman.com/wp-content/uploads/2018/12/concrete-recipe.jpg',
+      'https://scmaonline.org/wp-content/uploads/2019/06/cement-concrete.jpg',
     ];
 
     var controller = CarouselController();
@@ -35,22 +42,22 @@ class _QuestionDetailsState extends State<QuestionDetails> {
     }
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // openGallery();
-          // ImageViewer.showImageSlider(
-          //   images: [
-          //     'https://cdn.eso.org/images/thumb300y/eso1907a.jpg',
-          //     'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
-          //     'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
-          //   ],
-          //   startingPosition: 1,
-          // );
-          //
-          translator.setNewLanguage(context,
-              newLanguage: 'ar', remember: true, restart: false);
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     // openGallery();
+      //     // ImageViewer.showImageSlider(
+      //     //   images: [
+      //     //     'https://cdn.eso.org/images/thumb300y/eso1907a.jpg',
+      //     //     'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
+      //     //     'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
+      //     //   ],
+      //     //   startingPosition: 1,
+      //     // );
+      //     //
+      //     translator.setNewLanguage(context,
+      //         newLanguage: 'ar', remember: true, restart: false);
+      //   },
+      // ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
@@ -116,26 +123,24 @@ class _QuestionDetailsState extends State<QuestionDetails> {
                     children: <Widget>[
                       CarouselSlider(
                           options: CarouselOptions(
-                            height: 150,
-                            aspectRatio: 16 / 9,
-                            viewportFraction: 0.8,
-                            initialPage: 0,
-
-                            enableInfiniteScroll: false,
-                            reverse: false,
-                            autoPlay: true,
-                            autoPlayInterval: Duration(seconds: 3),
-                            autoPlayAnimationDuration:
-                                Duration(milliseconds: 800),
-                            autoPlayCurve: Curves.fastOutSlowIn,
-                            enlargeCenterPage: true,
-                            scrollDirection: Axis.horizontal,
-                            onPageChanged: (index,_){
-                              setState(() {
-                                questionActiveImageIndex = index;
-                              });
-                            }
-                          ),
+                              height: 150,
+                              aspectRatio: 16 / 9,
+                              viewportFraction: 0.8,
+                              initialPage: 0,
+                              enableInfiniteScroll: false,
+                              reverse: false,
+                              autoPlay: true,
+                              autoPlayInterval: Duration(seconds: 3),
+                              autoPlayAnimationDuration:
+                                  Duration(milliseconds: 800),
+                              autoPlayCurve: Curves.fastOutSlowIn,
+                              enlargeCenterPage: true,
+                              scrollDirection: Axis.horizontal,
+                              onPageChanged: (index, _) {
+                                setState(() {
+                                  questionActiveImageIndex = index;
+                                });
+                              }),
                           items: [
                             Hero(
                               tag: 0,
@@ -143,8 +148,12 @@ class _QuestionDetailsState extends State<QuestionDetails> {
                                 onTap: () {
                                   openGallery(index: 0);
                                 },
-                                child:
-                                Image.network(urlImages[0], height: 80.0,width: 400,fit: BoxFit.cover,),
+                                child: Image.network(
+                                  urlImages[0],
+                                  height: 80.0,
+                                  width: 400,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                             Hero(
@@ -153,8 +162,12 @@ class _QuestionDetailsState extends State<QuestionDetails> {
                                 onTap: () {
                                   openGallery(index: 1);
                                 },
-                                child:
-                                Image.network(urlImages[1], height: 80.0,width: 400,fit: BoxFit.cover,),
+                                child: Image.network(
+                                  urlImages[1],
+                                  height: 80.0,
+                                  width: 400,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                             Hero(
@@ -163,12 +176,18 @@ class _QuestionDetailsState extends State<QuestionDetails> {
                                 onTap: () {
                                   openGallery(index: 2);
                                 },
-                                child:
-                                Image.network(urlImages[2], height: 80.0,width: 400,fit: BoxFit.cover,),
+                                child: Image.network(
+                                  urlImages[2],
+                                  height: 80.0,
+                                  width: 400,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ]),
-                      SizedBox(height: 16,),
+                      SizedBox(
+                        height: 16,
+                      ),
                       AnimatedSmoothIndicator(
                         activeIndex: questionActiveImageIndex,
                         count: urlImages.length,
@@ -239,13 +258,12 @@ class _QuestionDetailsState extends State<QuestionDetails> {
                     controlAffinity: ListTileControlAffinity.leading,
                     children: <Widget>[
                       CarouselSlider(
-                          carouselController: controller,
                           options: CarouselOptions(
                               height: 150,
                               aspectRatio: 16 / 9,
                               viewportFraction: 0.8,
                               initialPage: 0,
-                              enableInfiniteScroll: true,
+                              enableInfiniteScroll: false,
                               reverse: false,
                               autoPlay: true,
                               autoPlayInterval: Duration(seconds: 3),
@@ -260,16 +278,60 @@ class _QuestionDetailsState extends State<QuestionDetails> {
                                 });
                               }),
                           items: [
-                            Container(color: Colors.red),
-                            Container(color: Colors.green),
-                            Container(color: Colors.blue),
+                            Hero(
+                              tag: 0,
+                              child: GestureDetector(
+                                onTap: () {
+                                  openGallery(index: 0);
+                                },
+                                child: Image.network(
+                                  urlImagesAns[0],
+                                  height: 80.0,
+                                  width: 400,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Hero(
+                              tag: 1,
+                              child: GestureDetector(
+                                onTap: () {
+                                  openGallery(index: 1);
+                                },
+                                child: Image.network(
+                                  urlImagesAns[1],
+                                  height: 80.0,
+                                  width: 400,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Hero(
+                              tag: 2,
+                              child: GestureDetector(
+                                onTap: () {
+                                  openGallery(index: 2);
+                                },
+                                child: Image.network(
+                                  urlImagesAns[2],
+                                  height: 80.0,
+                                  width: 400,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
                           ]),
-                      SizedBox(height: 16,),
+                      SizedBox(
+                        height: 16,
+                      ),
                       AnimatedSmoothIndicator(
                         activeIndex: answerActiveImageIndex,
                         count: urlImages.length,
-                        effect: WormEffect(), // your preferred effect
-                        onDotClicked: (index) {},
+                        effect: WormEffect(
+                          activeDotColor: Colors.red,
+                          dotHeight: 10,
+                          dotWidth: 10,
+                        ), // your preferred effect
                       ),
                     ],
                   ),
@@ -289,7 +351,27 @@ class _QuestionDetailsState extends State<QuestionDetails> {
                     tilePadding: EdgeInsets.zero,
                     title: Text('Video'.tr()),
                     controlAffinity: ListTileControlAffinity.leading,
-                    children: <Widget>[],
+                    children: <Widget>[
+                      YoutubePlayerBuilder(
+                          player: YoutubePlayer(
+                            controller: YoutubePlayerController(
+                              initialVideoId:
+                              YoutubePlayer.convertUrlToId('https://youtu.be/fYPXzaxG7Mo')!,
+                              flags: YoutubePlayerFlags(
+                                autoPlay: false,
+                              ),
+                            ),
+                          ),
+                          builder: (context, player) {
+                            return Column(
+                              children: [
+                                // some widgets
+                                player,
+                                //some other widgets
+                              ],
+                            );
+                          }),
+                    ],
                   ),
                 ),
               ),

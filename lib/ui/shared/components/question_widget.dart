@@ -1,3 +1,4 @@
+import 'package:faq_cemex/ui/shared/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,16 +18,23 @@ class QuestionWidget extends StatelessWidget {
             MaterialPageRoute(builder: (context) => const QuestionDetails()));
       },
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 28.h),
-        child: Row(
-          children: [
-            Expanded(
-                child: Text(
-              question.questionTitle,
-              style: const TextStyle(fontSize: 14),
-            )),
-            const Icon(Icons.navigate_next),
-          ],
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+        child: Card(
+          margin: EdgeInsets.zero,
+          color: Colors.white,
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 28.h,horizontal: 16),
+            child: Row(
+              children: [
+                Expanded(
+                    child: Text(
+                  question.questionTitle,
+                  style: const TextStyle(fontSize: 14),
+                )),
+                const Icon(Icons.navigate_next),
+              ],
+            ),
+          ),
         ),
       ),
     );

@@ -50,6 +50,9 @@ dependencies:
   firebase_messaging: ^11.2.13
   flutter_local_notifications: ^9.4.0
   firebase_core: ^1.14.1
+  flutter_app_badger: ^1.4.0
+  badges: ^2.0.2
+
 
 # This package is not updated in PubDev and there was a problem with flutter version 2.10  fixed with
 # github repository version of the package

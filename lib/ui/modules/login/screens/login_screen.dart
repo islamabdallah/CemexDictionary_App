@@ -1,3 +1,5 @@
+import 'package:faq_cemex/ui/modules/register/screens/register_screen.dart';
+import 'package:faq_cemex/ui/modules/search_screen/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -71,7 +73,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-
                         child: Image.asset(
                           'assets/images/login.jpg',
                           width: 300.w,
@@ -80,19 +81,22 @@ class _LoginScreenState extends State<LoginScreen> {
                           fit: BoxFit.fitHeight,
                         ),
                       ),
-                      SizedBox(height: 20.h,),
+                      SizedBox(
+                        height: 20.h,
+                      ),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'Login',
-                          style: TextStyle(fontSize: 36.sp,color: mainColor),
+                          style: TextStyle(fontSize: 36.sp, color: mainColor),
                         ),
                       ),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          'Welcome back to Out App',
-                          style: TextStyle(fontSize: 18.sp,color: Colors.grey[700]),
+                          'Welcome back to Our App',
+                          style: TextStyle(
+                              fontSize: 18.sp, color: Colors.grey[700]),
                         ),
                       ),
                       Form(
@@ -113,8 +117,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   size: 26,
                                   color: mainColor,
                                 ),
-                                filled: true,
-                                fillColor: Color(0xFFF5F5F5),
+                                // filled: true,
+                                // fillColor: Color(0xFFF5F5F5),
                                 isDense: true,
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(5.r),
@@ -128,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             TextFormField(
                               obscureText: !cubit.isTextVisible,
                               decoration: InputDecoration(
-                                label: Text('PassWord'),
+                                label: Text('Password'),
                                 labelStyle: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     color: mainColor),
@@ -150,22 +154,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                               !LoginCubit.get(context)
                                                   .isTextVisible);
                                     },
-                                    icon:
-                                        LoginCubit.get(context).isTextVisible
-                                            ? Icon(
-                                                Icons.visibility_off_outlined,
-                                                color: mainColor,
-                                                size: 30.r,
-                                              )
-                                            : Icon(
-                                                Icons.remove_red_eye_outlined,
-                                                color: mainColor,
-                                                size: 30.r,
-                                              ),
+                                    icon: LoginCubit.get(context).isTextVisible
+                                        ? Icon(
+                                            Icons.visibility_off_outlined,
+                                            color: mainColor,
+                                            size: 30.r,
+                                          )
+                                        : Icon(
+                                            Icons.remove_red_eye_outlined,
+                                            color: mainColor,
+                                            size: 30.r,
+                                          ),
                                   ),
                                 ),
-                                filled: true,
-                                fillColor: Color(0xFFF5F5F5),
+                                // filled: true,
+                                // fillColor: Color(0xFFF5F5F5),
                                 isDense: true,
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(5.r),
@@ -177,7 +180,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: 40.h,
+                        height: 20.h,
                       ),
                       SizedBox(
                         width: 120.w,
@@ -189,15 +192,41 @@ class _LoginScreenState extends State<LoginScreen> {
                                     BorderRadius.all(Radius.circular(5.r))),
                           ),
                           onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              cubit.login();
-                            }
+                            // if (formKey.currentState!.validate()) {
+                            //   cubit.login();
+                            // }
+                            Navigator.pushReplacementNamed(context, SearchScreen.routeName);
                           },
                           child: Text(
                             'Login'.tr(),
                           ),
                         ),
                       ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        children: [
+                          Text('You don\'t have account?'),
+                          SizedBox(
+                            width: 4,
+                          ),
+                          TextButton(
+                            style: TextButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                                minimumSize: Size(50, 30),
+                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                alignment: Alignment.centerLeft),
+                            onPressed: () {
+                              Navigator.pushReplacementNamed(
+                                  context, RegisterScreen.routeName);
+                            },
+                            child: Text(
+                              'Sign up',
+                            ),
+                          )
+                        ],
+                      )
                     ],
                   ),
                 ),

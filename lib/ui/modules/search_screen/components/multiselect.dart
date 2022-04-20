@@ -109,27 +109,73 @@ class MultiSelectDialog extends StatelessWidget {
         // TODO: implement listener
       },
       builder: (context, state) {
-        return AlertDialog(
-          title: Text(
-              cubit.selectedItems.isNotEmpty ? cubit.selectedItems.last : ''),
-          contentPadding: EdgeInsets.only(top: 12.0),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children:
-                  cubit.items.map((item) => _buildItem(item, context)).toList(),
-            ),
-          ),
-          actions: <Widget>[
-            FlatButton(
-              child: Text('CANCEL'),
-              onPressed: _onCancelTap,
-            ),
-            FlatButton(
-              child: Text('OK'),
-              onPressed: _onSubmitTap,
-            )
-          ],
+        return Dialog(
+          backgroundColor: Colors.transparent,
+          insetPadding: EdgeInsets.symmetric(horizontal: 20),
+          child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.white,
+              ),
+              padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+              child: Column(mainAxisSize: MainAxisSize.min, children: [
+                Text('Select Categories',style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.bold),),
+                SizedBox(height: 16,),
+                ...cubit.items
+                    .map((item) => _buildItem(item, context))
+                    .toList(),
+
+                SizedBox(height: 16,),
+                SizedBox(
+                    height: 45,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        // FlutterAppBadger.isAppBadgeSupported();
+                        // FlutterAppBadger.updateBadgeCount(10);
+                        // FlutterAppBadger.removeBadge();
+                        Navigator.pop(context);
+                      },
+                      child: Text('Done'),
+                      style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(11))),
+                    )),
+              ])),
         );
+        // return AlertDialog(
+        //   insetPadding: EdgeInsets.zero,
+        //   contentPadding: EdgeInsets.zero,
+        //   clipBehavior: Clip.antiAliasWithSaveLayer,
+        //   title: Text(
+        //       cubit.selectedItems.isNotEmpty ? cubit.selectedItems.last : ''),
+        //   // contentPadding: EdgeInsets.only(top: 12.0),
+        //   content: SingleChildScrollView(
+        //     child: ListBody(
+        //       children:
+        //       [
+        //       ...cubit.items.map((item) => _buildItem(item, context)).toList(),
+        //         SizedBox(
+        //             height: 45,
+        //             width: double.infinity,
+        //             child: ElevatedButton(
+        //               onPressed: () {
+        //                 // FlutterAppBadger.isAppBadgeSupported();
+        //                 // FlutterAppBadger.updateBadgeCount(10);
+        //                 // FlutterAppBadger.removeBadge();
+        //                 Navigator.pop(context);
+        //               },
+        //               child: Text('Done'),
+        //               style: ElevatedButton.styleFrom(
+        //                   shape: RoundedRectangleBorder(
+        //                       borderRadius: BorderRadius.circular(11))),
+        //             )),
+        //       ]
+        //
+        //     ),
+        //   ),
+        // );
       },
     );
   }
@@ -145,7 +191,7 @@ class MultiSelectDialog extends StatelessWidget {
             cubit.onItemCheckedChange(item, checked);
           },
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 0),
             child: Row(
               children: [
                 Text(item),
@@ -156,12 +202,10 @@ class MultiSelectDialog extends StatelessWidget {
                   curve: Curves.fastLinearToSlowEaseIn,
                   decoration: BoxDecoration(
                       boxShadow: const [
-                        BoxShadow(
-                            color: Colors.black38,
-                            blurRadius: 2 )
+                        BoxShadow(color: Colors.black38, blurRadius: 2)
                       ],
                       color: checked ? Colors.red : Colors.white,
-                      borderRadius: BorderRadius.circular(7.0),
+                      borderRadius: BorderRadius.circular(4.0),
                       border: !checked
                           ? Border.all(
                               color: Color(0xFF707070),
@@ -182,7 +226,11 @@ class MultiSelectDialog extends StatelessWidget {
             ),
           ),
         ),
-        Divider(height: 15,thickness: 1,color: Color(0xFFC5C5C5),)
+        Divider(
+          height: 15,
+          thickness: 1,
+          color: Color(0xFFC5C5C5),
+        )
       ],
     );
   }

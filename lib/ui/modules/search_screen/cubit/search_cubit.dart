@@ -7,7 +7,7 @@ part 'search_state.dart';
 class SearchCubit extends Cubit<SearchState> {
   static SearchCubit get(context) => BlocProvider.of(context);
 
-  List<String>  items = ['test1','test2','test3'];
+  List<String>  items = ['Prices','Quality','Products'];
   List<String> selectedItems =[];
 
   SearchCubit() : super(SearchInitial());

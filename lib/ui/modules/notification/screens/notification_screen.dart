@@ -23,7 +23,7 @@ class NotificationScreen extends StatelessWidget {
                 position: index,
                 duration: const Duration(milliseconds: 1000),
                 child: SlideAnimation(
-                  horizontalOffset: 50.0,
+                  horizontalOffset: 100.0,
                   child: FadeInAnimation(
                     child: Padding(
                       padding: EdgeInsets.symmetric(vertical: 8.h,horizontal: 16.w),

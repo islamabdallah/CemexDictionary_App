@@ -4,6 +4,8 @@ import '../../../ui/modules/add_question/screens/add_question_screen.dart';
 import '../../../ui/modules/login/screens/login_screen.dart';
 import '../../../ui/modules/my_questions/screens/my_questions_screen.dart';
 import '../../../ui/modules/notification/screens/notification_screen.dart';
+import '../../../ui/modules/register/screens/register_screen.dart';
+import '../../../ui/modules/search_result/screens/search_result_screen.dart';
 import '../../../ui/modules/search_screen/screens/search_screen.dart';
 
 class AppRoutes {
@@ -11,14 +13,19 @@ class AppRoutes {
     switch (settings.name) {
       case LoginScreen.routeName:
         return _materialRoute(const LoginScreen(), LoginScreen.routeName);
+      case RegisterScreen.routeName:
+        return _materialRoute(const RegisterScreen(), RegisterScreen.routeName);
       case SearchScreen.routeName:
         return _materialRoute(const SearchScreen(), SearchScreen.routeName);
+      case SearchResultScreen.routeName:
+        return _materialRoute(
+            const SearchResultScreen(), SearchResultScreen.routeName);
       case MyQuestions.routeName:
         return _materialRoute(const MyQuestions(), MyQuestions.routeName);
       case AddQuestionScreen.routeName:
         return _materialRoute(
             const AddQuestionScreen(), AddQuestionScreen.routeName);
-        case NotificationScreen.routeName:
+      case NotificationScreen.routeName:
         return _materialRoute(
             const NotificationScreen(), NotificationScreen.routeName);
       default:

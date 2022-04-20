@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 
 import '../../../shared/constants.dart';
+import '../../../shared/utils/message_dialog.dart';
 import '../cubit/add_question_cubit.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -41,10 +42,29 @@ class AddQuestionScreenState extends State<AddQuestionScreen> {
               title: Text('Add question'),
               centerTitle: true,
               actions: [
-                IconButton(onPressed: (){}, icon: Icon(Icons.send))
+                IconButton(
+                    onPressed: () {
+                      showMessageDialog(
+                        context: context,
+                        isSucceeded: true,
+                        message: 'Question Sent Successfully!',
+                        onPressedOk: () => Navigator.pop(context),
+                      );
+                    },
+                    icon: Icon(Icons.send))
               ],
             ),
-            floatingActionButton: FloatingActionButton(onPressed: (){},child: Icon(Icons.send),),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                showMessageDialog(
+                  context: context,
+                  isSucceeded: true,
+                  message: 'Question Sent Successfully!',
+                  onPressedOk: () => Navigator.pop(context),
+                );
+              },
+              child: Icon(Icons.send),
+            ),
             body: SafeArea(
               child: SingleChildScrollView(
                 child: Container(
@@ -54,6 +74,7 @@ class AddQuestionScreenState extends State<AddQuestionScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         DropdownButtonFormField<String>(
+                          iconSize: 0.0,
                           decoration: InputDecoration(
                             label: Text('Category'),
                             floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -66,17 +87,28 @@ class AddQuestionScreenState extends State<AddQuestionScreen> {
                               color: mainColor,
                             ),
                             filled: true,
-                            fillColor: Color(0xFFF5F5F5),
+                            fillColor: Colors.white,
                             isDense: true,
+                            suffixIcon: Icon(
+                              Icons.arrow_drop_down,
+                              size: 24,
+                            ),
+                            // suffixIconConstraints: BoxConstraints(maxHeight: 500),
                             enabledBorder: InputBorder.none,
                             focusedBorder: InputBorder.none,
                           ),
-                          onChanged: (item){},
+                          onChanged: (item) {},
                           items: [
                             DropdownMenuItem<String>(
-                              value: 'test',
-                              child: Text('test'),
-                            )
+                              value: 'Prices',
+                              child: Text('Prices'),
+                            ),        DropdownMenuItem<String>(
+                              value: 'Quality',
+                              child: Text('Quality'),
+                            ),        DropdownMenuItem<String>(
+                              value: 'Products',
+                              child: Text('Products'),
+                            ),
                           ],
                         ),
                         SizedBox(
@@ -96,7 +128,7 @@ class AddQuestionScreenState extends State<AddQuestionScreen> {
                               color: mainColor,
                             ),
                             filled: true,
-                            fillColor: Color(0xFFF5F5F5),
+                            fillColor: Colors.white,
                             isDense: true,
                             enabledBorder: InputBorder.none,
                             // focusedBorder: InputBorder.none,
@@ -120,7 +152,7 @@ class AddQuestionScreenState extends State<AddQuestionScreen> {
                               color: mainColor,
                             ),
                             filled: true,
-                            fillColor: Color(0xFFF5F5F5),
+                            fillColor: Colors.white,
                             isDense: true,
                             enabledBorder: InputBorder.none,
                             // focusedBorder: InputBorder.none,

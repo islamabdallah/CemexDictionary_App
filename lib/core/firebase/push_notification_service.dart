@@ -1,5 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 
 import '../../ui/modules/notification/screens/notification_screen.dart';
 
@@ -22,6 +23,8 @@ class PushNotificationService {
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       print('Got a message whilst in the foreground!');
       print('Message data: ${message.data}');
+      // FlutterAppBadger.updateBadgeCount(1);
+
 
       if (message.notification != null) {
         print(
