@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
 
 import '../../ui/modules/notification/screens/notification_screen.dart';
+import 'notifcation_service.dart';
 
 
 
@@ -10,6 +11,7 @@ class PushNotificationService {
   static init(context) async {
     // await FirebaseMessaging.instance.getToken();
    await getDeviceToken();
+   await subscribeToTopicAll();
     // workaround for onLaunch: When the app is completely closed (not in the background) and opened directly from the push notification
     FirebaseMessaging.instance
         .getInitialMessage()
@@ -25,10 +27,22 @@ class PushNotificationService {
       print('Message data: ${message.data}');
       // FlutterAppBadger.updateBadgeCount(1);
 
-
-      if (message.notification != null) {
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+      if (notification != null && android != null) {
         print(
             'Message also contained a notification:\n${message.notification!.title}\n${message.notification!.body}');
+
+        NotificationService notificationService = NotificationService();
+        notificationService.initializeNotification();
+        notificationService.notifun = () {
+          Navigator.pushNamed(context, NotificationScreen.routeName);
+        };
+        notificationService.displayNotification(
+          id: notification.hashCode,
+          title: notification.title,
+          body: notification.body,
+        );
       }
     });
 
@@ -47,6 +61,19 @@ class PushNotificationService {
     // LocalStorageService().setToken(deviceToken);
     return deviceToken;
   }
+
+  static subscribeToTopicAll() async {
+    await FirebaseMessaging.instance.subscribeToTopic('all');
+  }
+  static unsubscribeFromTopicAll() async {
+    await FirebaseMessaging.instance.unsubscribeFromTopic('all');
+  }
+
+  static deleteDeviceToken() async{
+   await unsubscribeFromTopicAll();
+   await FirebaseMessaging.instance.deleteToken();
+  }
+
 
   // static serialiseAndNavigate(Map<String, dynamic> message, context) {
   //   var notificationData = message['data'];

@@ -52,6 +52,8 @@ dependencies:
   firebase_core: ^1.14.1
   flutter_app_badger: ^1.4.0
   badges: ^2.0.2
+  dropdown_search: ^3.0.1
+
 
 
 # This package is not updated in PubDev and there was a problem with flutter version 2.10  fixed with

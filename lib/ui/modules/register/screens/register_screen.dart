@@ -1,8 +1,10 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 
+import '../../../shared/components/drop_down_full_tap.dart';
 import '../../../shared/constants.dart';
 import '../../../shared/utils/loading_dialog.dart';
 import '../../../shared/utils/message_dialog.dart';
@@ -236,6 +238,41 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 ),
                               ],
                             ),
+                            SizedBox(
+                              height: 16.h,
+                            ),
+
+                            DropdownSearch<String>(
+                              mode: Mode.MENU,
+                              showSelectedItems: true,
+                              items: ["Brazil", "Italia (Disabled)", "Tunisia", 'Canada'],
+                              dropdownSearchDecoration: InputDecoration(
+                                label: Text('Zone'),
+                                labelStyle: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: mainColor),
+                                prefixIcon: Icon(
+                                  Icons.location_on,
+                                  size: 26,
+                                  color: mainColor,
+                                ),
+                                // filled: true,
+                                // fillColor: Color(0xFFF5F5F5),
+                                suffixIcon: Icon(
+                                  Icons.arrow_drop_down,
+                                  size: 24,
+                                  color: Colors.black.withOpacity(0.7),
+                                ),
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5.r),
+                                  borderSide: BorderSide(color: mainColor),
+                                ),
+                              ),
+                              onChanged: print,
+                              selectedItem: "Brazil",
+                            ),
+
                             SizedBox(
                               height: 16.h,
                             ),

@@ -16,6 +16,7 @@ import 'package:localize_and_translate/localize_and_translate.dart';
 
 import 'carousel_youtube_player_screen.dart';
 import 'core/config/routes/routes.dart';
+import 'core/firebase/notifcation_service.dart';
 import 'core/utils/services/bloc_observer.dart';
 import 'core/utils/services/local/cache_helper.dart';
 import 'home_screen.dart';
@@ -35,6 +36,8 @@ void main() async {
 
   await Firebase.initializeApp();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
+
 
   await CacheHelper.init();
 
